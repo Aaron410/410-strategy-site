@@ -8,7 +8,7 @@
 
 // ─── CONFIG ────────────────────────────────────────────────────────────────────
 define('AIRTABLE_TOKEN',    'AIRTABLE_API_KEY_PLACEHOLDER');
-define('AIRTABLE_BASE_ID',  'appGQNIHNAGrOuj1l');
+define('AIRTABLE_BASE_ID',  'AIRTABLE_BASE_ID_PLACEHOLDER');
 define('AIRTABLE_TABLE',    'Orders');
 define('SLACK_BOT_TOKEN',   'SLACK_BOT_TOKEN_PLACEHOLDER');
 define('SLACK_CHANNEL',     'C0AMJ90F7L0');

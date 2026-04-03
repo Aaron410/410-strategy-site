@@ -12,7 +12,7 @@
 define('STRIPE_SECRET_KEY',  'STRIPE_SECRET_KEY_PLACEHOLDER');
 define('STRIPE_WEBHOOK_SECRET', 'STRIPE_WEBHOOK_SECRET_PLACEHOLDER');
 define('AIRTABLE_TOKEN',     'AIRTABLE_API_KEY_PLACEHOLDER');
-define('AIRTABLE_BASE_ID',   'appGQNIHNAGrOuj1l');
+define('AIRTABLE_BASE_ID',   'AIRTABLE_BASE_ID_PLACEHOLDER');
 define('AIRTABLE_TABLE',     'Orders');
 define('SLACK_WEBHOOK_URL',  ''); // Optional: set Slack incoming webhook URL here for Stripe events
 define('LOG_FILE', __DIR__ . '/webhook_log.txt');
