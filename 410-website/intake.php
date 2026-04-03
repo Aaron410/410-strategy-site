@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎯 Your Audit Order — 410 Strategy</title>
+  <meta name="description" content="You&#039;re just one step away. Fill out your intake form and we&#039;ll have your branded audit report delivered within 48 hours." />
+
+  <!-- Open Graph -->
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://410strategy.com/intake.php?" />
+  <meta property="og:site_name"    content="410 Strategy" />
+  <meta property="og:title"        content="🎯 Your Audit Order — 410 Strategy" />
+  <meta property="og:description"  content="You&#039;re just one step away. Fill out your intake form and we&#039;ll have your branded audit report delivered within 48 hours." />
+  <meta property="og:image"        content="https://410strategy.com/og-image.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="🎯 Your Audit Order — 410 Strategy" />
+  <meta name="twitter:description" content="You&#039;re just one step away. Fill out your intake form and we&#039;ll have your branded audit report delivered within 48 hours." />
+  <meta name="twitter:image"       content="https://410strategy.com/og-image.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23050d1a'/><text x='4' y='24' font-size='22' font-family='Arial' font-weight='900' fill='%23d4a843'>4</text></svg>" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #050d1a;
+      --navy-2: #080f1e;
+      --gold: #d4a843;
+      --gold-light: #e8c46a;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: rgba(255,255,255,0.07);
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--text); min-height: 100vh; }
+
+    nav { background: rgba(5,13,26,0.98); border-bottom: 1px solid var(--border); padding: 0 24px; }
+    .nav-inner { max-width: 800px; margin: 0 auto; height: 60px; display: flex; align-items: center; }
+    .nav-logo { font-size: 1.15rem; font-weight: 800; color: #fff; text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+
+    .page-wrap { max-width: 640px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    .step-indicator { display: flex; gap: 8px; align-items: center; margin-bottom: 40px; }
+    .step { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; }
+    .step-dot { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
+    .step-dot.done { background: var(--gold); color: #050d1a; }
+    .step-dot.active { background: var(--gold); color: #050d1a; }
+    .step-dot.pending { background: rgba(255,255,255,0.1); color: var(--muted); }
+    .step-label { color: var(--muted); }
+    .step.active .step-label { color: #fff; font-weight: 600; }
+    .step-divider { flex: 1; height: 1px; background: var(--border); }
+
+    .page-title { font-size: 1.9rem; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .page-sub { color: var(--muted); margin-bottom: 36px; }
+
+    .product-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(212,168,67,0.12); border: 1px solid rgba(212,168,67,0.3); border-radius: 8px; padding: 10px 16px; margin-bottom: 32px; font-size: 0.9rem; }
+    .product-badge strong { color: var(--gold); }
+
+    .form-card { background: var(--navy-2); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
+    .form-group label .req { color: var(--gold); margin-left: 2px; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.95rem;
+      transition: border-color 0.2s; outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+    .form-group .hint { font-size: 0.78rem; color: var(--muted); margin-top: 5px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .submit-btn { width: 100%; padding: 16px; background: var(--gold); color: #050d1a; border: none;
+      border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .submit-btn:hover { background: var(--gold-light); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .secure-note { display: flex; align-items: center; gap: 6px; justify-content: center; color: var(--muted); font-size: 0.78rem; margin-top: 14px; }
+
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://410strategy.com" class="nav-logo">410<span>Strategy</span></a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="step-indicator">
+    <div class="step done">
+      <div class="step-dot done">✓</div>
+      <span class="step-label">Payment</span>
+    </div>
+    <div class="step-divider"></div>
+    <div class="step active">
+      <div class="step-dot active">2</div>
+      <span class="step-label">Your Info</span>
+    </div>
+    <div class="step-divider"></div>
+    <div class="step">
+      <div class="step-dot pending">3</div>
+      <span class="step-label">Confirmed</span>
+    </div>
+  </div>
+
+  <div id="productBadge" class="product-badge">
+    <strong>✅ Payment received</strong> — <span id="productLabel">One more step below</span>
+  </div>
+
+  <h1 class="page-title">Tell Us About Your Business</h1>
+  <p class="page-sub">This 2-minute form helps us deliver exactly what you need. We'll review your answers before starting your audit.</p>
+
+  <div class="form-card">
+    <form id="intakeForm" action="/intake-handler.php" method="POST">
+      <!-- Hidden fields populated by JS -->
+      <input type="hidden" name="product" id="fieldProduct" />
+      <input type="hidden" name="session_id" id="fieldSession" />
+
+      <div class="form-group">
+        <label>Business Name <span class="req">*</span></label>
+        <input type="text" name="business_name" placeholder="Apex Plumbing Co." required />
+      </div>
+
+      <div class="form-group">
+        <label>Business Website <span class="req">*</span></label>
+        <input type="url" name="website_url" placeholder="https://yourbusiness.com" required />
+      </div>
+
+      <div class="form-group">
+        <label>Google Business Profile URL <span class="req">*</span></label>
+        <input type="url" name="gbp_url" placeholder="https://maps.app.goo.gl/..." required />
+        <div class="hint">Go to Google Maps, search your business, click "Share" → copy the link</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>City <span class="req">*</span></label>
+          <input type="text" name="city" placeholder="Billings" required />
+        </div>
+        <div class="form-group">
+          <label>State <span class="req">*</span></label>
+          <input type="text" name="state" placeholder="MT" maxlength="2" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Primary Service / Business Category <span class="req">*</span></label>
+        <input type="text" name="category" placeholder="e.g. Plumber, Med Spa, HVAC, Contractor" required />
+      </div>
+
+      <div class="form-group">
+        <label>Anything specific you want us to focus on?</label>
+        <textarea name="notes" placeholder="Optional — competitors you're losing to, services you most want to rank for, recent changes to your GBP, etc."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Submit My Information →</button>
+      <div class="secure-note">🔒 Your info is kept confidential and only used to deliver your audit</div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Parse URL params and populate hidden fields
+  const params = new URLSearchParams(window.location.search);
+  const product = params.get('product') || '';
+  const session = params.get('session_id') || '';
+
+  document.getElementById('fieldProduct').value = product;
+  document.getElementById('fieldSession').value = session;
+
+  // Update product badge
+  const labels = {
+    'gbp-audit': 'GBP Audit — $97',
+    'website-critique': 'Website Critique — $197',
+    'bundle': 'GBP + Website Bundle — $247'
+  };
+  if (product && labels[product]) {
+    document.getElementById('productLabel').textContent = labels[product];
+  }
+
+  // Prevent double-submit
+  document.getElementById('intakeForm').addEventListener('submit', function() {
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('submitBtn').textContent = 'Submitting...';
+  });
+</script>
+
+</body>
+</html>

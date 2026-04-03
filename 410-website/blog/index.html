@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Digital marketing tips, strategy, and local SEO insights from 410 Strategy — paid media experts serving Montana and beyond." />
+  <meta name="robots" content="index, follow" />
+  <title>Digital Marketing Tips & Strategy | 410 Strategy Blog</title>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://410strategy.com/blog/" />
+  <meta property="og:title" content="Digital Marketing Tips & Strategy | 410 Strategy Blog" />
+  <meta property="og:description" content="Digital marketing tips, local SEO, and Google Ads insights from 410 Strategy." />
+  <meta property="og:site_name" content="410 Strategy" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23050d1a'/><text x='4' y='24' font-size='22' font-family='Arial' font-weight='900' fill='%23d4a843'>4</text></svg>" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #050d1a;
+      --navy-2: #080f1e;
+      --gold: #d4a843;
+      --gold-light: #e8c46a;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: rgba(255,255,255,0.07);
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--text); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(5,13,26,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-size: 1.2rem; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { list-style: none; display: flex; gap: 28px; }
+    .nav-links a { font-size: 0.9rem; color: var(--muted); font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .btn { display: inline-block; padding: 10px 22px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; cursor: pointer; }
+    .btn-gold { background: var(--gold); color: #050d1a; }
+    .btn-gold:hover { background: var(--gold-light); }
+
+    /* HERO */
+    .blog-hero { padding: 72px 24px 56px; text-align: center; border-bottom: 1px solid var(--border); }
+    .blog-hero .eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .blog-hero h1 { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; color: #fff; letter-spacing: -1px; margin-bottom: 16px; }
+    .blog-hero p { font-size: 1.05rem; color: var(--muted); max-width: 540px; margin: 0 auto; }
+
+    /* GRID */
+    .blog-grid-wrap { max-width: 1100px; margin: 0 auto; padding: 56px 24px 80px; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+
+    /* CARD */
+    .post-card { background: var(--navy-2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s; }
+    .post-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .post-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+    .post-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .post-card h2 { font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 12px; }
+    .post-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; flex: 1; margin-bottom: 20px; }
+    .post-meta { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+    .post-date { font-size: 0.78rem; color: var(--muted); }
+    .post-read { font-size: 0.85rem; font-weight: 600; color: var(--gold); }
+    .post-read:hover { color: var(--gold-light); }
+
+    /* FOOTER */
+    footer { background: var(--navy-2); border-top: 1px solid var(--border); padding: 40px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+    .footer-logo { font-size: 1.1rem; font-weight: 800; color: #fff; }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy { font-size: 0.82rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+    .footer-links a:hover { color: #fff; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+      .footer-links { justify-content: center; gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://410strategy.com" class="nav-logo">410<span>Strategy</span></a>
+    <ul class="nav-links">
+      <li><a href="https://410strategy.com/#services">Services</a></li>
+      <li><a href="https://410strategy.com/#about">About</a></li>
+      <li><a href="https://410strategy.com/blog/">Blog</a></li>
+      <li><a href="https://410strategy.com/#contact">Contact</a></li>
+    </ul>
+    <a href="https://410strategy.com/#contact" class="btn btn-gold">Get Started</a>
+  </div>
+</nav>
+
+<div class="blog-hero">
+  <span class="eyebrow">The 410 Strategy Blog</span>
+  <h1>Marketing Insights That<br/>Actually Move the Needle</h1>
+  <p>No fluff. Practical strategy, local SEO tips, and paid media advice for businesses ready to grow.</p>
+</div>
+
+<div class="blog-grid-wrap">
+  <div class="blog-grid">
+
+    <div class="post-card">
+      <div class="post-card-body">
+        <span class="post-tag">Local SEO</span>
+        <h2>The 10-Point Google Business Profile Checklist Every Local Business Needs</h2>
+        <p>Most local businesses are invisible on Google — not because they lack reviews, but because their GBP has gaps in the exact spots Google uses to rank you. Here's what to fix first.</p>
+        <div class="post-meta">
+          <span class="post-date">April 2, 2026</span>
+          <a href="/blog/google-business-profile-checklist.html" class="post-read">Read More →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-body">
+        <span class="post-tag">Google Ads</span>
+        <h2>Why Your Google Ads Aren't Converting (And What to Actually Fix)</h2>
+        <p>Running Google Ads with mediocre results? It's rarely the budget. It's almost always one of five fixable problems — and most business owners don't know to look for them.</p>
+        <div class="post-meta">
+          <span class="post-date">April 2, 2026</span>
+          <a href="/blog/why-your-google-ads-arent-converting.html" class="post-read">Read More →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-body">
+        <span class="post-tag">Med Spa Marketing</span>
+        <h2>Local SEO for Med Spas: How to Show Up When Clients Search</h2>
+        <p>The med spa market is exploding — and so is the competition. Here's exactly how to position your practice to dominate local search results and capture high-intent clients.</p>
+        <div class="post-meta">
+          <span class="post-date">April 2, 2026</span>
+          <a href="/blog/local-seo-for-med-spas.html" class="post-read">Read More →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">410<span>Strategy</span></div>
+    <div class="footer-copy">© 2026 410 Strategy LLC · Billings, Montana</div>
+    <div class="footer-links">
+      <a href="mailto:aaron@410strategy.com">Contact</a>
+      <a href="https://410strategy.com/#services">Services</a>
+      <a href="https://410strategy.com/#about">About</a>
+      <a href="https://410strategy.com/blog/">Blog</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

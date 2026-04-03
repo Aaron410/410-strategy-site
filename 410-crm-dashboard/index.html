@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>410 Strategy CRM Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23050d1a'/><text x='4' y='24' font-size='22' font-family='Arial' font-weight='900' fill='%23d4a843'>4</text></svg>" />
+
+  <style>
+    /* ─── RESET + VARS ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #050d1a;
+      --navy-2: #080f1e;
+      --navy-3: #0d1829;
+      --gold:   #d4a843;
+      --gold-l: #e8c46a;
+      --text:   #e2e8f0;
+      --muted:  #8892a4;
+      --border: rgba(255,255,255,0.07);
+      --green:  #2ecc71;
+      --red:    #e74c3c;
+      --orange: #f39c12;
+      --blue:   #3498db;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--text); min-height: 100vh; }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--gold-l); }
+    select, input, textarea { font-family: 'Inter', sans-serif; }
+
+    /* ─── HEADER ───────────────────────────────────────────────────── */
+    .header { background: var(--navy-2); border-bottom: 1px solid var(--border); padding: 0 24px; position: sticky; top: 0; z-index: 50; }
+    .header-inner { max-width: 1400px; margin: 0 auto; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .header-logo { font-size: 1.15rem; font-weight: 800; color: #fff; }
+    .header-logo span { color: var(--gold); }
+    .header-sub { font-size: 0.78rem; color: var(--muted); margin-left: 12px; }
+    .header-right { display: flex; gap: 12px; align-items: center; }
+    .refresh-btn { padding: 6px 14px; background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+    .refresh-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .sync-status { font-size: 0.75rem; color: var(--muted); }
+
+    /* ─── STATS BAR ────────────────────────────────────────────────── */
+    .stats-bar { background: var(--navy-3); border-bottom: 1px solid var(--border); padding: 12px 24px; }
+    .stats-inner { max-width: 1400px; margin: 0 auto; display: flex; gap: 24px; flex-wrap: wrap; }
+    .stat-pill { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; }
+    .stat-pill .val { font-weight: 700; font-size: 1rem; }
+    .stat-pill .lbl { color: var(--muted); }
+    .s-gold { color: var(--gold); }
+    .s-green { color: var(--green); }
+    .s-blue { color: var(--blue); }
+    .s-orange { color: var(--orange); }
+    .stat-div { width: 1px; background: var(--border); height: 24px; }
+
+    /* ─── TABS ─────────────────────────────────────────────────────── */
+    .tabs { background: var(--navy-2); border-bottom: 1px solid var(--border); padding: 0 24px; }
+    .tabs-inner { max-width: 1400px; margin: 0 auto; display: flex; gap: 4px; overflow-x: auto; }
+    .tab-btn { padding: 14px 18px; font-size: 0.85rem; font-weight: 600; color: var(--muted); border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+    .tab-btn:hover { color: #fff; }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .tab-count { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: rgba(212,168,67,0.15); border-radius: 50%; font-size: 0.65rem; margin-left: 6px; color: var(--gold); }
+
+    /* ─── CONTENT ──────────────────────────────────────────────────── */
+    .content { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+    /* ─── LOADING ──────────────────────────────────────────────────── */
+    .loading { text-align: center; padding: 80px 24px; color: var(--muted); }
+    .spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── EMPTY STATE ──────────────────────────────────────────────── */
+    .empty { text-align: center; padding: 60px 24px; color: var(--muted); }
+    .empty .icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+    /* ─── ORDER CARDS ──────────────────────────────────────────────── */
+    .orders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+    .order-card { background: var(--navy-2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.2s; }
+    .order-card:hover { border-color: rgba(212,168,67,0.3); }
+    .order-card-header { padding: 16px 20px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .order-biz { font-weight: 700; font-size: 1rem; color: #fff; }
+    .product-badge { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
+    .badge-gbp { background: rgba(52,152,219,0.15); color: var(--blue); }
+    .badge-website { background: rgba(155,89,182,0.15); color: #9b59b6; }
+    .badge-bundle { background: rgba(212,168,67,0.15); color: var(--gold); }
+    .badge-unknown { background: rgba(255,255,255,0.08); color: var(--muted); }
+
+    .order-card-body { padding: 16px 20px; }
+    .order-field { display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
+    .order-field:last-child { margin-bottom: 0; }
+    .field-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
+    .field-value { font-size: 0.9rem; color: #c8d4e3; word-break: break-word; }
+    .field-value a { color: var(--gold); }
+    .field-value a:hover { color: var(--gold-l); }
+
+    .order-card-footer { padding: 12px 20px; background: rgba(0,0,0,0.15); border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
+
+    /* Status dropdown */
+    .status-row { display: flex; align-items: center; gap: 8px; }
+    .status-select { flex: 1; padding: 7px 10px; background: var(--navy-3); border: 1px solid var(--border); border-radius: 6px; color: #fff; font-size: 0.82rem; cursor: pointer; }
+    .status-select:focus { outline: none; border-color: var(--gold); }
+    .save-status-btn { padding: 7px 14px; background: var(--gold); color: #050d1a; border: none; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .save-status-btn:hover { background: var(--gold-l); }
+
+    /* Report link */
+    .report-row { display: flex; gap: 6px; }
+    .report-input { flex: 1; padding: 7px 10px; background: var(--navy-3); border: 1px solid var(--border); border-radius: 6px; color: #fff; font-size: 0.78rem; }
+    .report-input::placeholder { color: var(--muted); }
+    .save-report-btn { padding: 7px 12px; background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 0.78rem; cursor: pointer; transition: all 0.2s; }
+    .save-report-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    .order-meta { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); }
+    .amount-val { color: var(--green); font-weight: 600; }
+
+    /* ─── COST TRACKER TAB ─────────────────────────────────────────── */
+    .cost-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .cost-table th { text-align: left; padding: 12px 16px; background: var(--navy-3); color: var(--muted); font-size: 0.72rem; letter-spacing: 0.5px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    .cost-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: #c8d4e3; }
+    .cost-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .cost-table .amount-col { color: var(--green); font-weight: 600; }
+    .cost-table .cost-col { color: var(--orange); }
+    .cost-table .margin-col { font-weight: 700; }
+    .margin-good { color: var(--green); }
+    .margin-warn { color: var(--orange); }
+    .margin-bad  { color: var(--red); }
+    .cost-summary { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+    .summary-card { background: var(--navy-2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; }
+    .summary-card .s-val { font-size: 1.5rem; font-weight: 800; }
+    .summary-card .s-lbl { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+    /* ─── MOBILE ───────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .orders-grid { grid-template-columns: 1fr; }
+      .header-sub { display: none; }
+      .stats-inner { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────────────────────────────────── -->
+<div class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center">
+      <span class="header-logo">410<span>Strategy</span></span>
+      <span class="header-sub">Order Management Dashboard</span>
+    </div>
+    <div class="header-right">
+      <span class="sync-status" id="syncStatus">Not synced</span>
+      <button class="refresh-btn" onclick="loadAllOrders()">↻ Refresh</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── STATS BAR ──────────────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stats-inner" id="statsBar">
+    <div class="stat-pill"><span class="val s-gold" id="statTotal">—</span><span class="lbl">Total Orders</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-pill"><span class="val s-blue" id="statInbox">—</span><span class="lbl">New / Inbox</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-pill"><span class="val s-orange" id="statProgress">—</span><span class="lbl">In Progress</span></div>
+    <div class="stat-div"></div>
+    <div class="stat-pill"><span class="val s-green" id="statRevenue">—</span><span class="lbl">Total Revenue</span></div>
+  </div>
+</div>
+
+<!-- ─── TABS ───────────────────────────────────────────────────────── -->
+<div class="tabs">
+  <div class="tabs-inner">
+    <button class="tab-btn active" onclick="switchTab('inbox')" id="tab-inbox">
+      📥 Inbox <span class="tab-count" id="cnt-inbox">0</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('progress')" id="tab-progress">
+      ⚙️ In Progress <span class="tab-count" id="cnt-progress">0</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('review')" id="tab-review">
+      👀 Pending Review <span class="tab-count" id="cnt-review">0</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('fulfilled')" id="tab-fulfilled">
+      ✅ Fulfilled <span class="tab-count" id="cnt-fulfilled">0</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('costs')" id="tab-costs">
+      💰 Cost Tracker
+    </button>
+  </div>
+</div>
+
+<!-- ─── CONTENT ────────────────────────────────────────────────────── -->
+<div class="content">
+  <div id="pane-inbox">
+    <div class="loading" id="loading-inbox"><div class="spinner"></div>Loading orders...</div>
+    <div class="orders-grid" id="grid-inbox"></div>
+    <div class="empty" id="empty-inbox" style="display:none"><div class="icon">📭</div><p>No new orders</p></div>
+  </div>
+
+  <div id="pane-progress" style="display:none">
+    <div class="orders-grid" id="grid-progress"></div>
+    <div class="empty" id="empty-progress" style="display:none"><div class="icon">⚙️</div><p>Nothing in progress</p></div>
+  </div>
+
+  <div id="pane-review" style="display:none">
+    <div class="orders-grid" id="grid-review"></div>
+    <div class="empty" id="empty-review" style="display:none"><div class="icon">👀</div><p>Nothing pending review</p></div>
+  </div>
+
+  <div id="pane-fulfilled" style="display:none">
+    <div class="orders-grid" id="grid-fulfilled"></div>
+    <div class="empty" id="empty-fulfilled" style="display:none"><div class="icon">✅</div><p>No fulfilled orders yet</p></div>
+  </div>
+
+  <div id="pane-costs" style="display:none">
+    <div style="margin-bottom:20px">
+      <h2 style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:4px">Cost & Margin Tracker</h2>
+      <p style="font-size:0.85rem;color:var(--muted)">Revenue vs. token cost per order. Update Token Cost inline in Airtable.</p>
+    </div>
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>Business</th>
+          <th>Product</th>
+          <th>Amount</th>
+          <th>Token Cost</th>
+          <th>Margin</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="costTableBody">
+        <tr><td colspan="7" style="text-align:center;padding:40px;color:var(--muted)">Loading...</td></tr>
+      </tbody>
+    </table>
+    <div class="cost-summary" id="costSummary" style="display:none">
+      <div class="summary-card"><div class="s-val s-green" id="sumRevenue">$0</div><div class="s-lbl">Total Revenue</div></div>
+      <div class="summary-card"><div class="s-val s-orange" id="sumCost">$0</div><div class="s-lbl">Total Token Cost</div></div>
+      <div class="summary-card"><div class="s-val" id="sumMargin">—</div><div class="s-lbl">Avg Margin %</div></div>
+      <div class="summary-card"><div class="s-val s-gold" id="sumOrders">0</div><div class="s-lbl">Total Orders</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SCRIPTS ────────────────────────────────────────────────────── -->
+<script>
+// ─── CONFIG ────────────────────────────────────────────────────────────────────
+const AIRTABLE_TOKEN   = 'AIRTABLE_API_KEY_PLACEHOLDER';
+const AIRTABLE_BASE    = 'appGQNIHNAGrOuj1l';
+const AIRTABLE_TABLE   = 'Orders';
+const AIRTABLE_API     = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${encodeURIComponent(AIRTABLE_TABLE)}`;
+
+const STATUS_OPTIONS   = ['New Order', 'Awaiting Intake', 'In Progress', 'Pending Approval', 'Fulfilled', 'Archived'];
+
+let allRecords = [];
+let currentTab = 'inbox';
+
+// ─── FETCH ALL ─────────────────────────────────────────────────────────────────
+async function fetchAirtable(offset = '') {
+  const url = AIRTABLE_API + '?pageSize=100&sort[0][field]=Created&sort[0][direction]=desc'
+            + (offset ? `&offset=${offset}` : '');
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
+  });
+  if (!res.ok) throw new Error(`Airtable error: ${res.status}`);
+  return res.json();
+}
+
+async function loadAllOrders() {
+  document.getElementById('syncStatus').textContent = 'Syncing...';
+  document.getElementById('loading-inbox').style.display = 'block';
+  document.getElementById('grid-inbox').innerHTML = '';
+
+  try {
+    allRecords = [];
+    let offset = '';
+    do {
+      const data = await fetchAirtable(offset);
+      allRecords.push(...(data.records || []));
+      offset = data.offset || '';
+    } while (offset);
+
+    document.getElementById('syncStatus').textContent = `Last sync: ${new Date().toLocaleTimeString()}`;
+    document.getElementById('loading-inbox').style.display = 'none';
+    renderAll();
+  } catch (err) {
+    document.getElementById('syncStatus').textContent = 'Sync failed';
+    document.getElementById('loading-inbox').style.display = 'none';
+    console.error(err);
+  }
+}
+
+// ─── RENDER ────────────────────────────────────────────────────────────────────
+function renderAll() {
+  const inbox     = allRecords.filter(r => ['New Order','Awaiting Intake'].includes(r.fields['Status']));
+  const progress  = allRecords.filter(r => r.fields['Status'] === 'In Progress');
+  const review    = allRecords.filter(r => r.fields['Status'] === 'Pending Approval');
+  const fulfilled = allRecords.filter(r => r.fields['Status'] === 'Fulfilled');
+
+  // Update counts
+  document.getElementById('cnt-inbox').textContent     = inbox.length;
+  document.getElementById('cnt-progress').textContent  = progress.length;
+  document.getElementById('cnt-review').textContent    = review.length;
+  document.getElementById('cnt-fulfilled').textContent = fulfilled.length;
+
+  // Stats
+  const totalRevenue = allRecords.reduce((s, r) => s + (parseFloat(r.fields['Amount']) || 0), 0);
+  document.getElementById('statTotal').textContent    = allRecords.length;
+  document.getElementById('statInbox').textContent    = inbox.length;
+  document.getElementById('statProgress').textContent = progress.length;
+  document.getElementById('statRevenue').textContent  = '$' + totalRevenue.toFixed(2);
+
+  // Render each grid
+  renderGrid('inbox', inbox);
+  renderGrid('progress', progress);
+  renderGrid('review', review);
+  renderGrid('fulfilled', fulfilled);
+  renderCostTable(allRecords);
+}
+
+function renderGrid(id, records) {
+  const grid  = document.getElementById(`grid-${id}`);
+  const empty = document.getElementById(`empty-${id}`);
+  if (!records.length) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  grid.innerHTML = records.map(r => cardHTML(r)).join('');
+}
+
+function productBadgeClass(product) {
+  if (!product) return 'badge-unknown';
+  const p = product.toLowerCase();
+  if (p.includes('bundle')) return 'badge-bundle';
+  if (p.includes('website')) return 'badge-website';
+  if (p.includes('gbp') || p.includes('audit')) return 'badge-gbp';
+  return 'badge-unknown';
+}
+
+function cardHTML(r) {
+  const f = r.fields;
+  const id = r.id;
+  const amount = f['Amount'] ? '$' + parseFloat(f['Amount']).toFixed(2) : '—';
+  const date   = f['Created'] ? new Date(f['Created']).toLocaleDateString() : '—';
+  const gbpLink = f['GBP URL'] ? `<a href="${f['GBP URL']}" target="_blank" rel="noopener">Open GBP ↗</a>` : '—';
+  const siteLink = f['Website URL'] ? `<a href="${f['Website URL']}" target="_blank" rel="noopener">${f['Website URL']}</a>` : '—';
+  const reportVal = f['Report Link'] || '';
+  const product = f['Product'] || 'Unknown';
+  const badgeClass = productBadgeClass(product);
+  const status = f['Status'] || '';
+
+  const statusOpts = STATUS_OPTIONS.map(s =>
+    `<option value="${s}" ${s === status ? 'selected' : ''}>${s}</option>`
+  ).join('');
+
+  return `
+  <div class="order-card" id="card-${id}">
+    <div class="order-card-header">
+      <div class="order-biz">${f['Business Name'] || f['Contact Name'] || 'Unknown Business'}</div>
+      <span class="product-badge ${badgeClass}">${product}</span>
+    </div>
+    <div class="order-card-body">
+      ${f['Contact Name'] ? `<div class="order-field"><span class="field-label">Contact</span><span class="field-value">${f['Contact Name']}</span></div>` : ''}
+      ${f['Email'] ? `<div class="order-field"><span class="field-label">Email</span><span class="field-value"><a href="mailto:${f['Email']}">${f['Email']}</a></span></div>` : ''}
+      ${f['City/State'] ? `<div class="order-field"><span class="field-label">Location</span><span class="field-value">${f['City/State']}</span></div>` : ''}
+      ${f['Category'] ? `<div class="order-field"><span class="field-label">Category</span><span class="field-value">${f['Category']}</span></div>` : ''}
+      <div class="order-field"><span class="field-label">GBP</span><span class="field-value">${gbpLink}</span></div>
+      ${f['Website URL'] ? `<div class="order-field"><span class="field-label">Website</span><span class="field-value">${siteLink}</span></div>` : ''}
+      ${f['Notes'] ? `<div class="order-field"><span class="field-label">Notes</span><span class="field-value">${f['Notes']}</span></div>` : ''}
+      ${f['Assigned To'] ? `<div class="order-field"><span class="field-label">Assigned</span><span class="field-value">${f['Assigned To']}</span></div>` : ''}
+    </div>
+    <div class="order-card-footer">
+      <div class="status-row">
+        <select class="status-select" id="status-${id}">${statusOpts}</select>
+        <button class="save-status-btn" onclick="saveStatus('${id}')">Save</button>
+      </div>
+      <div class="report-row">
+        <input type="url" class="report-input" id="report-${id}" placeholder="Google Drive report link…" value="${reportVal}" />
+        <button class="save-report-btn" onclick="saveReport('${id}')">📎 Save</button>
+      </div>
+      <div class="order-meta">
+        <span class="amount-val">${amount}</span>
+        <span>${date}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── COST TABLE ────────────────────────────────────────────────────────────────
+function renderCostTable(records) {
+  const tbody = document.getElementById('costTableBody');
+  if (!records.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--muted)">No orders yet</td></tr>';
+    return;
+  }
+
+  let totalRev = 0, totalCost = 0, margins = [];
+
+  const rows = records.map(r => {
+    const f = r.fields;
+    const amount    = parseFloat(f['Amount']) || 0;
+    const tokenCost = parseFloat(f['Token Cost']) || 0;
+    const margin    = amount > 0 ? ((amount - tokenCost) / amount * 100) : null;
+    totalRev  += amount;
+    totalCost += tokenCost;
+    if (margin !== null) margins.push(margin);
+
+    const marginClass = margin === null ? '' : margin > 70 ? 'margin-good' : margin > 40 ? 'margin-warn' : 'margin-bad';
+    const marginStr   = margin !== null ? margin.toFixed(0) + '%' : '—';
+    const date = f['Created'] ? new Date(f['Created']).toLocaleDateString() : '—';
+
+    return `<tr>
+      <td>${f['Business Name'] || f['Contact Name'] || '—'}</td>
+      <td>${f['Product'] || '—'}</td>
+      <td class="amount-col">$${amount.toFixed(2)}</td>
+      <td class="cost-col">${tokenCost > 0 ? '$' + tokenCost.toFixed(2) : '—'}</td>
+      <td class="margin-col ${marginClass}">${marginStr}</td>
+      <td>${date}</td>
+      <td>${f['Status'] || '—'}</td>
+    </tr>`;
+  }).join('');
+
+  tbody.innerHTML = rows;
+
+  const avgMargin = margins.length ? (margins.reduce((a,b) => a+b,0)/margins.length).toFixed(0) + '%' : '—';
+  document.getElementById('sumRevenue').textContent = '$' + totalRev.toFixed(2);
+  document.getElementById('sumCost').textContent    = '$' + totalCost.toFixed(2);
+  document.getElementById('sumMargin').textContent  = avgMargin;
+  document.getElementById('sumOrders').textContent  = records.length;
+  document.getElementById('costSummary').style.display = 'flex';
+}
+
+// ─── INLINE UPDATES ────────────────────────────────────────────────────────────
+async function patchRecord(recordId, fields) {
+  const res = await fetch(`${AIRTABLE_API}/${recordId}`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${AIRTABLE_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ fields }),
+  });
+  return res.ok;
+}
+
+async function saveStatus(recordId) {
+  const select = document.getElementById(`status-${recordId}`);
+  const newStatus = select.value;
+  const btn = select.nextElementSibling;
+  btn.textContent = '…';
+  btn.disabled = true;
+
+  const ok = await patchRecord(recordId, { Status: newStatus });
+  btn.textContent = ok ? '✓' : '!';
+  btn.disabled = false;
+  setTimeout(() => { btn.textContent = 'Save'; }, 1500);
+
+  if (ok) {
+    // Update local cache
+    const rec = allRecords.find(r => r.id === recordId);
+    if (rec) rec.fields['Status'] = newStatus;
+    renderAll();
+  }
+}
+
+async function saveReport(recordId) {
+  const input = document.getElementById(`report-${recordId}`);
+  const url   = input.value.trim();
+  const btn   = input.nextElementSibling;
+  btn.textContent = '…';
+
+  const ok = await patchRecord(recordId, { 'Report Link': url });
+  btn.textContent = ok ? '✓' : '!';
+  setTimeout(() => { btn.textContent = '📎 Save'; }, 1500);
+
+  if (ok) {
+    const rec = allRecords.find(r => r.id === recordId);
+    if (rec) rec.fields['Report Link'] = url;
+  }
+}
+
+// ─── TAB SWITCHING ─────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  currentTab = tab;
+  ['inbox','progress','review','fulfilled','costs'].forEach(t => {
+    document.getElementById(`pane-${t}`).style.display = t === tab ? 'block' : 'none';
+    document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
+  });
+}
+
+// ─── INIT ──────────────────────────────────────────────────────────────────────
+loadAllOrders();
+// Auto-refresh every 2 minutes
+setInterval(loadAllOrders, 120000);
+</script>
+</body>
+</html>

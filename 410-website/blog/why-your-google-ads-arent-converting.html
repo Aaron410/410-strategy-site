@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Running Google Ads with mediocre results? It's rarely the budget. Here are the 5 most common conversion killers — and exactly how to fix them." />
+  <meta name="robots" content="index, follow" />
+  <title>Why Your Google Ads Aren't Converting (And What to Actually Fix) | 410 Strategy</title>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://410strategy.com/blog/why-your-google-ads-arent-converting.html" />
+  <meta property="og:title" content="Why Your Google Ads Aren't Converting (And What to Actually Fix)" />
+  <meta property="og:description" content="Running Google Ads with mediocre results? It's rarely the budget. Here are the 5 most common conversion killers — and exactly how to fix them." />
+  <meta property="og:site_name" content="410 Strategy" />
+
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Why Your Google Ads Aren't Converting (And What to Actually Fix)",
+    "datePublished": "2026-04-02",
+    "dateModified": "2026-04-02",
+    "author": { "@type": "Organization", "name": "410 Strategy" },
+    "publisher": { "@type": "Organization", "name": "410 Strategy", "url": "https://410strategy.com" },
+    "description": "The 5 most common reasons Google Ads fail to convert — and exactly how to fix them."
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23050d1a'/><text x='4' y='24' font-size='22' font-family='Arial' font-weight='900' fill='%23d4a843'>4</text></svg>" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #050d1a;
+      --navy-2: #080f1e;
+      --gold: #d4a843;
+      --gold-light: #e8c46a;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: rgba(255,255,255,0.07);
+      --red: #e55;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--text); line-height: 1.7; }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--gold-light); }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(5,13,26,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-size: 1.2rem; font-weight: 800; color: #fff; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { list-style: none; display: flex; gap: 28px; }
+    .nav-links a { font-size: 0.9rem; color: var(--muted); font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .btn { display: inline-block; padding: 10px 22px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+    .btn-gold { background: var(--gold); color: #050d1a; }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-outline { border: 1.5px solid var(--gold); color: var(--gold); padding: 10px 22px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; display: inline-block; }
+    .btn-outline:hover { background: var(--gold); color: #050d1a; }
+
+    .article-wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
+    .article-meta { margin-bottom: 40px; }
+    .article-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .article-wrap h1 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 800; color: #fff; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 20px; }
+    .article-byline { font-size: 0.85rem; color: var(--muted); }
+
+    .article-body h2 { font-size: 1.3rem; font-weight: 700; color: #fff; margin: 36px 0 12px; }
+    .article-body p { margin-bottom: 18px; color: #c8d4e3; font-size: 1rem; }
+    .article-body ul, .article-body ol { margin: 0 0 18px 24px; color: #c8d4e3; }
+    .article-body li { margin-bottom: 8px; }
+    .article-body strong { color: #fff; font-weight: 600; }
+
+    /* PROBLEM CARDS */
+    .problem-list { list-style: none; margin-left: 0 !important; }
+    .problem-item { margin-bottom: 24px; padding: 24px; background: var(--navy-2); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 10px; }
+    .problem-label { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .problem-num { width: 28px; height: 28px; background: var(--gold); color: #050d1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; flex-shrink: 0; }
+    .problem-label strong { font-size: 1.05rem; color: #fff; font-weight: 700; }
+    .problem-item p { margin-bottom: 10px; font-size: 0.95rem; color: #c8d4e3; }
+    .problem-item p:last-child { margin-bottom: 0; }
+    .fix-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; display: block; }
+
+    /* STAT CALLOUT */
+    .stat-callout { background: rgba(212, 168, 67, 0.08); border: 1px solid rgba(212, 168, 67, 0.3); border-radius: 10px; padding: 20px 24px; margin: 28px 0; text-align: center; }
+    .stat-callout .stat { font-size: 2rem; font-weight: 800; color: var(--gold); }
+    .stat-callout p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; margin-bottom: 0; }
+
+    .cta-box { background: var(--navy-2); border: 1px solid var(--gold); border-radius: 12px; padding: 36px 32px; margin-top: 48px; text-align: center; }
+    .cta-box h3 { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .cta-box p { color: var(--muted); margin-bottom: 24px; font-size: 0.95rem; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .related-posts { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .related-posts h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 20px; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .related-card { background: var(--navy-2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; transition: border-color 0.2s; }
+    .related-card:hover { border-color: var(--gold); }
+    .related-card .tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+    .related-card h4 { font-size: 0.95rem; font-weight: 600; color: #fff; line-height: 1.4; }
+
+    footer { background: var(--navy-2); border-top: 1px solid var(--border); padding: 40px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+    .footer-logo { font-size: 1.1rem; font-weight: 800; color: #fff; }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy { font-size: 0.82rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.82rem; color: var(--muted); transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .cta-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://410strategy.com" class="nav-logo">410<span>Strategy</span></a>
+    <ul class="nav-links">
+      <li><a href="https://410strategy.com/#services">Services</a></li>
+      <li><a href="https://410strategy.com/#about">About</a></li>
+      <li><a href="https://410strategy.com/blog/">Blog</a></li>
+      <li><a href="https://410strategy.com/#contact">Contact</a></li>
+    </ul>
+    <a href="https://410strategy.com/#contact" class="btn btn-gold">Get Started</a>
+  </div>
+</nav>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-tag">Google Ads</span>
+    <h1>Why Your Google Ads Aren't Converting (And What to Actually Fix)</h1>
+    <p class="article-byline">By 410 Strategy · April 2, 2026 · 8 min read</p>
+  </div>
+
+  <div class="article-body">
+
+    <p>You set up Google Ads. You're spending money. Traffic is coming in. But the leads aren't there — or the ones that are coming in aren't closing.</p>
+
+    <p>This is one of the most common situations we see when a new client brings us their account. And here's what we've learned: <strong>the budget is almost never the problem.</strong> The fix is almost always structural.</p>
+
+    <p>Here are the five conversion killers we find most often — and how to address each one.</p>
+
+    <div class="stat-callout">
+      <div class="stat">76%</div>
+      <p>of Google Ads accounts we audit have at least 3 of these 5 issues active simultaneously.</p>
+    </div>
+
+    <h2>The 5 Conversion Killers</h2>
+
+    <ul class="problem-list">
+      <li class="problem-item">
+        <div class="problem-label">
+          <div class="problem-num">1</div>
+          <strong>Broad Match Keywords Without Negative Lists</strong>
+        </div>
+        <p>Broad match lets Google decide who sees your ads. Without a robust negative keyword list, you'll burn budget on irrelevant searches — "free," "jobs," "how to," and competitors' brand terms are common culprits. We've audited accounts spending $5,000/month where 40% of clicks were completely non-converting search terms.</p>
+        <span class="fix-label">The Fix</span>
+        <p>Pull your Search Terms report. Any term that doesn't reflect buying intent — add it to your negative list. Do this every week without exception. Over time, your budget concentrates on the searches that actually convert.</p>
+      </li>
+
+      <li class="problem-item">
+        <div class="problem-label">
+          <div class="problem-num">2</div>
+          <strong>Landing Page Doesn't Match Search Intent</strong>
+        </div>
+        <p>Someone searches "emergency plumber Billings MT" and your ad sends them to your homepage. That's a conversion killer. The message match is broken — they came with urgency and you greeted them with your company history. Google measures this mismatch through Quality Score and you pay for it in higher CPCs.</p>
+        <span class="fix-label">The Fix</span>
+        <p>Create dedicated landing pages for each ad group. The headline should use the searcher's exact language. The CTA should match the urgency of the query. One clear action, nothing else. This alone often doubles conversion rates.</p>
+      </li>
+
+      <li class="problem-item">
+        <div class="problem-label">
+          <div class="problem-num">3</div>
+          <strong>Conversion Tracking Is Broken or Missing</strong>
+        </div>
+        <p>This one is rampant. Google can't optimize toward conversions it can't see. If your tracking isn't firing correctly — or you're optimizing for "page views" instead of "form submissions" or "calls" — the entire Smart Bidding system is flying blind. You're essentially paying for a GPS with no map loaded.</p>
+        <span class="fix-label">The Fix</span>
+        <p>Verify every conversion action in Google Ads → Tools → Conversions. Confirm they're firing with Google Tag Assistant. Set your primary conversion to the deepest action (form fill, call, purchase). Secondary conversions can include softer signals.</p>
+      </li>
+
+      <li class="problem-item">
+        <div class="problem-label">
+          <div class="problem-num">4</div>
+          <strong>Ad Copy Sells Features, Not Outcomes</strong>
+        </div>
+        <p>"Professional, licensed, insured plumbing services" doesn't convert. "Fast Hot Water Restored Today — Call Now" does. Your prospects don't buy features. They buy relief, results, and certainty. Most ads are written from the seller's perspective. Write from the buyer's.</p>
+        <span class="fix-label">The Fix</span>
+        <p>For every headline, ask: "Would a person with this problem care about this?" If the answer is "maybe," cut it. Lead with the outcome they want. Include social proof ("100+ Reviews, 4.9 Stars"), urgency ("Same-Day Service"), and a clear next step.</p>
+      </li>
+
+      <li class="problem-item">
+        <div class="problem-label">
+          <div class="problem-num">5</div>
+          <strong>You're Bidding on the Wrong Campaign Type</strong>
+        </div>
+        <p>Performance Max campaigns have their place — but for service businesses that need local leads, Search campaigns with tight keyword control often outperform PMax significantly. Similarly, Display and YouTube burn budget without clear intent signals. Many business owners let Google push them into campaign types that benefit Google's revenue, not theirs.</p>
+        <span class="fix-label">The Fix</span>
+        <p>For most local service businesses, start with Search only. Add location targeting radius. Use phrase and exact match. Control your own budget allocation before trusting Google to do it for you. Once you have conversion data, then explore other campaign types.</p>
+      </li>
+    </ul>
+
+    <h2>The Common Thread</h2>
+
+    <p>Every one of these issues has the same root cause: <strong>the account was set up once and never actively managed.</strong> Google's defaults favor Google's revenue. Smart Bidding needs clean conversion data. Search Terms reports need weekly attention.</p>
+
+    <p>Ads that convert aren't set-and-forget. They're built, tested, refined, and optimized every week. That's the gap between businesses that see 2× ROAS and those seeing 4–6×.</p>
+
+    <h2>What a Professional Account Review Finds</h2>
+
+    <p>When we audit a Google Ads account, we go through every campaign, ad group, search term, bidding strategy, conversion setup, quality score, and landing page. We score the account against 50+ criteria and deliver a prioritized list of fixes — organized by which changes will have the biggest impact on your cost-per-lead.</p>
+
+    <p>Most clients see a meaningful reduction in cost-per-conversion within the first 30 days of implementing audit recommendations.</p>
+
+  </div>
+
+  <!-- CTA BOX -->
+  <div class="cta-box">
+    <h3>Ready to Fix Your Google Ads?</h3>
+    <p>Our Website & Ads Critique goes through your full funnel — landing page, ad copy, campaign structure, and conversion setup — and gives you a clear action plan.</p>
+    <div class="cta-btns">
+      <a href="https://buy.stripe.com/6oU8wR9Y73wx7so33j5AQ01" class="btn btn-gold">Get My Website Critique — $197 →</a>
+      <a href="https://410strategy.com/#contact" class="btn-outline">Talk to a Strategist</a>
+    </div>
+  </div>
+
+  <!-- RELATED POSTS -->
+  <div class="related-posts">
+    <h3>Related Articles</h3>
+    <div class="related-grid">
+      <a href="/blog/google-business-profile-checklist.html" class="related-card">
+        <span class="tag">Local SEO</span>
+        <h4>The 10-Point Google Business Profile Checklist Every Local Business Needs</h4>
+      </a>
+      <a href="/blog/local-seo-for-med-spas.html" class="related-card">
+        <span class="tag">Med Spa Marketing</span>
+        <h4>Local SEO for Med Spas: How to Show Up When Clients Search</h4>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">410<span>Strategy</span></div>
+    <div class="footer-copy">© 2026 410 Strategy LLC · Billings, Montana</div>
+    <div class="footer-links">
+      <a href="mailto:aaron@410strategy.com">Contact</a>
+      <a href="https://410strategy.com/#services">Services</a>
+      <a href="https://410strategy.com/blog/">Blog</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
