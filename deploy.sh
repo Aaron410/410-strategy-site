@@ -69,7 +69,7 @@ done
 
 # Deploy blog files if they exist
 if [ -d "$LOCAL_DIR/blog" ]; then
-    for f in "$LOCAL_DIR/blog"/*.html "$LOCAL_DIR/blog"/*.php 2>/dev/null; do
+    for f in "$LOCAL_DIR/blog"/*.html "$LOCAL_DIR/blog"/*.php; do
         [ -f "$f" ] && deploy_file "blog/$(basename $f)"
     done
 fi
