@@ -662,6 +662,7 @@
             <!-- Honeypot — invisible to humans, bots fill it in -->
             <div style="display:none;" aria-hidden="true">
               <input type="text" name="website_url" tabindex="-1" autocomplete="off" value="" />
+              <input type="hidden" name="_ft" id="_ft" value="" />
             </div>
 
             <div class="form-row">
@@ -764,6 +765,7 @@
 
     // Form submit feedback
     const form = document.getElementById('lead-form');
+    (function(){ var el=document.getElementById('_ft'); if(el){ var h=Math.floor(Date.now()/1000/3600); el.value=btoa('qs410xz9:'+h); } })();
     form.addEventListener('submit', () => {
       const btn = form.querySelector('button[type=submit]');
       btn.textContent = 'Sending…';
